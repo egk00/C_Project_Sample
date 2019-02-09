@@ -10,37 +10,42 @@ typedef struct ListNode {
 ListNode *create_node(int data, ListNode *link)
 {
 	ListNode *new_Node;
+	// 메모리 할당
 	new_Node = (ListNode *)malloc(sizeof(ListNode));
 	if (new_Node == NULL)
 		printf("메모리 할당 에러");
 
+	// 데이터
 	new_Node->data = data;
+	// 링크 설정
 	new_Node->link = link;
 	return (new_Node);
 }
 
 // phead : 리스트의 헤드 포인터의 포인터
-// node : 삽입될 노드
-void insert_node(ListNode **phead, ListNode *p, ListNode *node)
+// tail : 노드의 꼬리
+// new_node : 삽입될 노드
+void insert_node(ListNode **phead, ListNode *tail, ListNode *new_node)
 {
-	// 처음인 경우
+	// 공백 리스트 인 경우
 	if (*phead == NULL)
 	{
-		*phead = node;
-		node->link = node;
+		// 새로운 노드에 link는 null로 설정
+		new_node->link = NULL;
+		*phead = new_node;
 	}
 
-	// p가 NULL이면 첫 번째 노드로 삽입
-	else if ( p == NULL)
+	// tail이 NULL이면 첫 번째 노드로 삽입
+	else if (tail == NULL)
 	{
-		node->link = (*phead)->link;
-		(*phead)->link = node;
+		new_node->link = (*phead)->link;
+		(*phead)->link = new_node;
 	}
-	// p 다음에 삽입
+	// 리스트의 꼬리에 연결
 	else
 	{
-		node->link = p->link;
-		p->link = node;
+		new_node->link = tail->link;
+		tail->link = new_node;
 	}
 }
 
@@ -53,7 +58,7 @@ void display(ListNode *head)
 	{
 		printf("%d->", p->data);
 		p = p->link;
-	}
+		}
 	printf("\n");
 }
 
