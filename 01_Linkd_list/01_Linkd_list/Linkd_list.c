@@ -1,9 +1,5 @@
 #include <stdio.h>
 
-/*
- 10, 20, 30의 숫자를 삽입 삭제 정렬을 구현하세요
-*/
-
 // 구조체
 typedef struct ListNode {
 	int data;
@@ -26,44 +22,36 @@ ListNode *create_node(int data, ListNode *link)
 	return new_Node;
 }
 
-// 삽입
 // phead : 리스트의 헤드 포인터의 포인터
-// p : 선행 노드
 // new_node : 삽입될 노드
-void insert_node(ListNode **phead, ListNode *p, ListNode *new_node)
+void insert_node(ListNode **phead, ListNode *new_node)
 {
-	// 공백 리스트 인 경우
+	// 공백 리스트 인 경우(첫 노드)
 	if (*phead == NULL)
 	{
 		// 새로운 노드에 link는 null로 설정
 		new_node->link = NULL;
+		// 새로운 노드를 헤드에 연결
 		*phead = new_node;
 	}
-
-	// p가 NULL이면 첫 번째 노드로 삽입
-	else if (p == NULL)
+	// 노드의 헤드에 삽입
+	else if ( p == NULL)
 	{
-		new_node->link = *phead;
-		*phead = new_node;
-	}
-	// 리스트의 꼬리에 연결
-	else
-	{
-		new_node->link = p->link;
-		p->link = new_node;
+		new_node->link = tail->link;
+		tail->link = new_node;
 	}
 }
 
 // 삭제
 // phead : 리스트의 헤드 포인터의 포인터
-// p : 선행 노드
+// tail : 마지막을 가리키는 노드
 // new_node : 삽입될 노드
-void delete_node(ListNode *head, ListNode *p, ListNode *removed)
+void delete_node(ListNode *head, ListNode *tail, ListNode *removed)
 {
-	if (p == NULL)
+	if (tail == NULL)
 		*head = *head->link;
 	else
-		p->link = removed->link;
+		tail->link = removed->link;
 }
 
 // 출력
@@ -91,13 +79,15 @@ void remove_node(ListNode **phead, ListNode *tail, ListNode *removed)
 
 int main(void)
 {
-	ListNode *list = NULL;
+	ListNode *list1 = NULL;
+	ListNode *list2 = NULL;
+	ListNode *p;
 
 	// list1 = 30->20->10
-	insert_node(&list, NULL, create_node(10, NULL));
-	insert_node(&list, NULL, create_node(20, NULL));
-	insert_node(&list, NULL, create_node(30, NULL));
+	Push_Back(&list1, tail, create_node(10, NULL));
+	Push_Back(&head, tail, create_node(20, NULL));
+	Push_Back(&head, tail, create_node(30, NULL));
 
 	// 출력
-	display(list);
+	display(head);
 }
