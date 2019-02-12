@@ -23,10 +23,11 @@ ListNode *create_node(int data, ListNode *link)
 }
 
 // phead : 리스트의 헤드 포인터의 포인터
+// p : 삽입 될 노드의 선행 노드
 // new_node : 삽입될 노드
 void insert_node(ListNode **phead, ListNode *p, ListNode *new_node)
 {
-	// 공백 리스트 인 경우(첫 노드)
+	// (1) 공백 리스트 인 경우(첫 노드)
 	if (*phead == NULL)
 	{
 		// 새로운 노드에 link는 null로 설정
@@ -40,6 +41,7 @@ void insert_node(ListNode **phead, ListNode *p, ListNode *new_node)
 		new_node->link = *phead;
 		*phead = new_node;
 	}
+	// 
 	else
 	{
 		new_node->link = p->link;
