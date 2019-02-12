@@ -9,17 +9,17 @@ typedef struct ListNode {
 // 리스트 생성
 ListNode *create_node(int data, ListNode *link)
 {
-	ListNode *new_Node;
+	ListNode *new_node;
 	// 메모리 할당
-	new_Node = (ListNode *)malloc(sizeof(ListNode));
-	if (new_Node == NULL)
+	new_node = (ListNode *)malloc(sizeof(ListNode));
+	if (new_node == NULL)
 		printf("메모리 할당 에러");
 
 	// 데이터
-	new_Node->data = data;
+	new_node->data = data;
 	// 링크 설정
-	new_Node->link = link;
-	return new_Node;
+	new_node->link = link;
+	return new_node;
 }
 
 // phead : 리스트의 헤드 포인터의 포인터
@@ -73,7 +73,7 @@ void display(ListNode *head)
 }
 
 // head : 헤드 포인터에 대한 포인터
-// tail : 노드의 선행 노드
+// p : 노드의 선행 노드
 // removed : 삭제될 노드
 void remove_node(ListNode **phead, ListNode *p, ListNode *removed)
 {
